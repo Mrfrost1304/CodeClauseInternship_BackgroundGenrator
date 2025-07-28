@@ -39,7 +39,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <a
-                href="#"
+                href="https://github.com/Mrfrost1304/CodeClauseInternship_BackgroundGenrator"
                 className={`nav-link fw-medium px-3 ${
                   active === 'code'
                     ? 'active text-white bg-primary'
