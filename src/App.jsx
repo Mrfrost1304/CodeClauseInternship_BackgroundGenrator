@@ -9,6 +9,7 @@ import BackgrnContext from './store/backgroundContext';
 import ColorList from './Comonents/Colorlist';
 import Footer from './Comonents/Footer';
 import ColorControls from './Comonents/wrapper';
+import ColorPositionBar from './Comonents/ColorPositionBar';
 
 export function App() {
   const { isRadial } = useContext(BackgrnContext);
@@ -19,6 +20,8 @@ export function App() {
       <Header></Header>
       <GeneratedBackground></GeneratedBackground>
       <ColorControls>
+      <ColorPositionBar></ColorPositionBar>
+      <ColorList></ColorList>
         <Addcolor></Addcolor>
      
         <Radial />
