@@ -4,7 +4,7 @@ const ShowCSSbutton = ({ backgroundStyle }) => {
   const [showCSS, setShowCSS] = useState(false);
   const [copied, setCopied] = useState(false);
   const generatedCSS = `
-.grad {
+.gradient-background {
   background: ${backgroundStyle};
   background-size: 180% 180%;
   background-position: 0% 50%;
@@ -36,6 +36,8 @@ const ShowCSSbutton = ({ backgroundStyle }) => {
         <button
           className="btn btn-outline-primary px-4"
           onClick={() => setShowCSS(!showCSS)}
+          aria-expanded={showCSS}
+          aria-controls="generated-css"
         >
           {showCSS ? "Hide Generated CSS" : "Show Generated CSS"}
         </button>
@@ -45,8 +47,9 @@ const ShowCSSbutton = ({ backgroundStyle }) => {
         <div className="row justify-content-center">
           <div className="col-lg-10 position-relative">
             <pre
+              id="generated-css"
               className="bg-dark text-white p-4 rounded shadow-sm overflow-auto"
-              style={{ whiteSpace: "pre-wrap" }}
+              style={{ whiteSpace: "pre-wrap", position: "relative" }}
             >
               <code>{generatedCSS}</code>
               <button
