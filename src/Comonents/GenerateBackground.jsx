@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import BackgrnContext from "../store/backgroundContext";
 import ShowCSSbutton from "./ShowCSS";
+import ColorPositionBar from "./ColorPositionBar";
+import ColorList from "./Colorlist";
 
 const GeneratedBackground = () => {
   const { ColorsArray, angle, isRadial } = useContext(BackgrnContext);
@@ -18,10 +20,11 @@ const GeneratedBackground = () => {
       <div className="row justify-content-center">
         <div
           className="col-lg-10 grad rounded-4 shadow border"
-          style={{ '--background-gradient': 'backgroundStyle', minHeight: "350px" }}
+          style={{ '--background-gradient': backgroundStyle, minHeight: "350px" }}
         ></div>
       </div>
-
+      <ColorPositionBar></ColorPositionBar>
+      <ColorList></ColorList>
       <ShowCSSbutton backgroundStyle={backgroundStyle}></ShowCSSbutton>
     </div>
   );

@@ -20,7 +20,7 @@ export function App() {
       <GeneratedBackground></GeneratedBackground>
       <ColorControls>
         <Addcolor></Addcolor>
-       
+     
         <Radial />
         {!isRadial && <Angle />}
       </ColorControls>
