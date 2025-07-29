@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const ShowCSSbutton =({backgroundStyle})=>{
-     const [showCSS, setShowCSS] = useState(false);
+const ShowCSSbutton = ({ backgroundStyle }) => {
+  const [showCSS, setShowCSS] = useState(false);
   const [copied, setCopied] = useState(false);
   const generatedCSS = `
 .grad {
@@ -30,38 +30,37 @@ const ShowCSSbutton =({backgroundStyle})=>{
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   };
-    return (
-        <>
-        <div className="text-center my-4">
+  return (
+    <>
+      <div className="text-center my-4">
         <button
           className="btn btn-outline-primary px-4"
           onClick={() => setShowCSS(!showCSS)}
         >
-          {showCSS ? 'Hide Generated CSS' : 'Show Generated CSS'}
+          {showCSS ? "Hide Generated CSS" : "Show Generated CSS"}
         </button>
       </div>
 
-      
       {showCSS && (
         <div className="row justify-content-center">
           <div className="col-lg-10 position-relative">
             <pre
               className="bg-dark text-white p-4 rounded shadow-sm overflow-auto"
-              style={{ whiteSpace: 'pre-wrap' }}
+              style={{ whiteSpace: "pre-wrap" }}
             >
               <code>{generatedCSS}</code>
               <button
                 onClick={handleCopy}
                 className="btn btn-sm btn-light position-absolute"
-                style={{ top: '10px', right: '10px' }}
+                style={{ top: "10px", right: "10px" }}
               >
-                {copied ? 'Copied!' : 'Copy'}
+                {copied ? "Copied!" : "Copy"}
               </button>
             </pre>
           </div>
         </div>
       )}
-        </>
-    );
-}
+    </>
+  );
+};
 export default ShowCSSbutton;

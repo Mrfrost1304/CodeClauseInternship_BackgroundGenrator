@@ -1,31 +1,24 @@
-import { useContext, useState } from 'react';
-import BackgrnContext from '../store/backgroundContext';
-import ShowCSSbutton from './ShowCSS';
+import { useContext, useState } from "react";
+import BackgrnContext from "../store/backgroundContext";
+import ShowCSSbutton from "./ShowCSS";
 
 const GeneratedBackground = () => {
   const { ColorsArray, angle, isRadial } = useContext(BackgrnContext);
- 
 
   const backgroundStyle = isRadial
-    ? `radial-gradient(circle, ${ColorsArray.join(', ')})`
-    : `linear-gradient(${angle}deg, ${ColorsArray.join(', ')})`;
-
-  
-
-  
+    ? `radial-gradient(circle, ${ColorsArray.join(", ")})`
+    : `linear-gradient(${angle}deg, ${ColorsArray.join(", ")})`;
 
   return (
     <div className="container my-4">
-    
       <div className="row justify-content-center">
         <div
           className="col-lg-10 grad rounded-4 shadow border"
-          style={{ background: backgroundStyle, minHeight: '350px' }}
+          style={{ background: backgroundStyle, minHeight: "350px" }}
         ></div>
       </div>
 
-   <ShowCSSbutton backgroundStyle={backgroundStyle}></ShowCSSbutton>
-      
+      <ShowCSSbutton backgroundStyle={backgroundStyle}></ShowCSSbutton>
     </div>
   );
 };
