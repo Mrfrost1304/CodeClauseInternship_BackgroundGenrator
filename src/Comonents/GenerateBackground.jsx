@@ -18,7 +18,7 @@ const GeneratedBackground = () => {
       <div className="row justify-content-center">
         <div
           className="col-lg-10 grad rounded-4 shadow border"
-          style={{ '--background-gradient': backgroundStyle, minHeight: "350px" }}
+          style={{ '--background-gradient': 'backgroundStyle', minHeight: "350px" }}
         ></div>
       </div>
 

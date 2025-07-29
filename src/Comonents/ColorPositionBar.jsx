@@ -59,7 +59,7 @@ const ColorPositionBar = () => {
               top: "5px",
               left: `calc(${position}% - 10px)`,
               cursor: "pointer",
-              zIndex: 10,
+              zIndex: ColorsArray.length - index, // Ensures first-added is on top
             }}
             title={`Color: ${color}, Position: ${position.toFixed(1)}%`}
           />

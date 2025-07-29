@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import BackgrnContext from '../store/backgroundContext';
 import ColorBlock from './colorblock';
 import ColorPositionBar from './ColorPositionBar';
-
 const ColorList = () => {
   const { ColorsArray } = useContext(BackgrnContext);
 
@@ -23,7 +22,7 @@ const ColorList = () => {
           <ColorBlock key={index} color={color} index={index}></ColorBlock>
         ))}
       </div>
-      <ColorPositionBar />
+      
     </div>
   );
 };
