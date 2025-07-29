@@ -4,64 +4,54 @@ import BackgrnContext from "../store/backgroundContext";
 const ColorPositionBar = () => {
   const { ColorsArray, handleColorPositionChange } = useContext(BackgrnContext);
   const barRef = useRef(null);
-  const [draggingIndex, setDraggingIndex] = useState(null);
+  const [dragIndex, setDragIndex] = useState(null);
 
-  const handleMouseDown = (index) => (e) => {
-    e.preventDefault();
-    setDraggingIndex(index);
-  };
-
-  const handleMouseUp = () => {
-    setDraggingIndex(null);
-  };
-
-  const handleMouseMove = (e) => {
-    if (draggingIndex === null) return;
-    if (!barRef.current) return;
-
+  const updatePosition = (x) => {
     const rect = barRef.current.getBoundingClientRect();
-    let newPosition = ((e.clientX - rect.left) / rect.width) * 100;
-    newPosition = Math.min(100, Math.max(0, newPosition));
-    handleColorPositionChange(draggingIndex, newPosition);
+    let pos = ((x - rect.left) / rect.width) * 100;
+    pos = Math.min(100, Math.max(0, pos));
+    handleColorPositionChange(dragIndex, pos);
   };
 
   useEffect(() => {
-    if (draggingIndex !== null) {
-      window.addEventListener("mousemove", handleMouseMove);
-      window.addEventListener("mouseup", handleMouseUp);
-    } else {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
+    const move = (e) => updatePosition(e.touches ? e.touches[0].clientX : e.clientX);
+    const up = () => setDragIndex(null);
+
+    if (dragIndex !== null) {
+      window.addEventListener("mousemove", move);
+      window.addEventListener("mouseup", up);
+      window.addEventListener("touchmove", move);
+      window.addEventListener("touchend", up);
     }
+
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mouseup", up);
+      window.removeEventListener("touchmove", move);
+      window.removeEventListener("touchend", up);
     };
-  }, [draggingIndex]);
+  }, [dragIndex]);
 
   return (
     <div className="container my-4">
-      <h5 className="text-center mb-3 fw-semibold">🎨 Gradient Color Positions</h5>
-      <div
-        ref={barRef}
-        className="position-relative bg-light rounded"
-        style={{ height: "30px", userSelect: "none" }}
-      >
-        {ColorsArray.map(({ color, position }, index) => (
+      <h6 className="text-center fw-semibold">Color Positions</h6>
+      <div ref={barRef} className="position-relative bg-light rounded" style={{ height: 30, touchAction: "none" }}>
+        {ColorsArray.map(({ color, position }, i) => (
           <div
-            key={index}
-            onMouseDown={handleMouseDown(index)}
-            className="position-absolute rounded-circle border border-dark"
+            key={i}
+            onMouseDown={() => setDragIndex(i)}
+            onTouchStart={() => setDragIndex(i)}
             style={{
               backgroundColor: color,
-              width: "20px",
-              height: "20px",
-              top: "5px",
               left: `calc(${position}% - 10px)`,
+              width: 20,
+              height: 20,
+              top: 5,
+              zIndex: ColorsArray.length - i,
               cursor: "pointer",
-              zIndex: ColorsArray.length - index, // Ensures first-added is on top
             }}
-            title={`Color: ${color}, Position: ${position.toFixed(1)}%`}
+            className="position-absolute rounded-circle border border-dark"
+            title={`${color} at ${position.toFixed(1)}%`}
           />
         ))}
       </div>
