@@ -5,9 +5,13 @@ import ShowCSSbutton from "./ShowCSS";
 const GeneratedBackground = () => {
   const { ColorsArray, angle, isRadial } = useContext(BackgrnContext);
 
+  const gradientStops = ColorsArray
+    .map(({ color, position }) => `${color} ${position}%`)
+    .join(", ");
+
   const backgroundStyle = isRadial
-    ? `radial-gradient(circle, ${ColorsArray.join(", ")})`
-    : `linear-gradient(${angle}deg, ${ColorsArray.join(", ")})`;
+    ? `radial-gradient(circle, ${gradientStops})`
+    : `linear-gradient(${angle}deg, ${gradientStops})`;
 
   return (
     <div className="container my-4">
